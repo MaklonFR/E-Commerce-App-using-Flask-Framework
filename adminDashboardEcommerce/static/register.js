@@ -13,7 +13,7 @@
             const data = await response.json();
             if (response.ok) {
                 alert(data.msg);
-                window.location.href = '/login_page';  // Redirect ke halaman login setelah berhasil register
+                window.location.href = '/login';  // Redirect ke halaman login setelah berhasil register
             } else {
                 alert(data.msg);
             }
