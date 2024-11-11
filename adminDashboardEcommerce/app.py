@@ -16,6 +16,7 @@ dtm = datetime.today()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+IP_SERVER = "https://smkn1kuwus.sch.id/client-koperasi-boe"
 
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -52,6 +53,7 @@ def login():
                 return redirect(url_for('home'))
             return jsonify({"msg": "Login failed"}), 401
         return render_template('login.html')
+    return render_template('login.html')
 
 #Route to pages register admin
 @app.route ('/register_page')
@@ -565,4 +567,4 @@ def show_desproduct(idb):
         return jsonify([dict(des) for des in desproduct]), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, host="192.168.230.239", port=80)
+    app.run(debug=True, host="192.168.209.239", port=80)
