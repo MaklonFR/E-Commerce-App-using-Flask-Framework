@@ -8,7 +8,8 @@ import hashlib
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'pemrograman-web-framework'
-IP_SERVER = "http://192.168.230.239:80"
+IP_SERVER = "https://smkn1kuwus.sch.id/client-koperasi-boe"
+ips = "http://192.168.227.239:80"
 
 def create_connection():
     conn = sqlite3.connect(IP_SERVER+'/db_products.db', check_same_thread=False)
@@ -21,7 +22,7 @@ products = []
 @app.route ('/')
 def main():
     # Replace this URL with the actual endpoint of your PHP API
-    api_url = IP_SERVER+"/api/get_products"
+    api_url = ips+"/api/get_products"
     try:
         # Mengambil data dari API
         response = requests.get(api_url)
@@ -38,10 +39,12 @@ def main():
         print("Daftar Produk:")
         for product in products:
             print(f"ID: {product['product_id']}, Nama: {product['product_name']}, Harga: {product['product_price']}, Kategori: {product['category_name']}")
+
         return render_template("main.html", products=products, **server)
 
     except requests.exceptions.RequestException as e:
         print(f"Terjadi kesalahan: {e}")
+
 
 @app.route ('/product_details')
 def product_details():
@@ -57,7 +60,7 @@ def display_categories():
 def api_categories(cat):
     cat= cat
     #return render_template("products.html")
-    api_url = IP_SERVER+"/api/categories/"+ cat
+    api_url = ips+"/api/categories/"+ cat
     try:
         # Mengambil data dari API
         response = requests.get(api_url)
@@ -85,7 +88,7 @@ def api_categories(cat):
 def show_desproduct(idb):
     idb= idb
     #return render_template("products.html")
-    api_url = IP_SERVER+"/api/des_product/"+ idb
+    api_url = ips+"/api/des_product/"+ idb
     try:
         # Mengambil data dari API
         response = requests.get(api_url)
@@ -105,4 +108,4 @@ def show_desproduct(idb):
         print(f"Terjadi kesalahan: {e}")
 
 if __name__ == '__main__':
-    app.run(debug=True, host="192.168.230.239", port=5000)
+    app.run(debug=True, host="192.168.227.239", port=5000)
